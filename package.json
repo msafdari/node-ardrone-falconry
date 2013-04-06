@@ -15,7 +15,8 @@
     "ecstatic" : "*",
     "mux-demux" : "*",
     "dnode" : "*",
-    "color-convert" : "*"
+    "color-convert" : "*",
+    "opencv" : "*"
   },
   "bundleDependencies": ["keypress","canvas"],
   "devDependencies": {},

@@ -16,6 +16,8 @@ var minArea = 400;
 exports.detectAndRender = function (matrix, frameToRender) {
 	var currTargetX; // x coord of current target
 	var currTargetY; // y coord of current target
+	var currWidth;  // width of the bounding box
+	var currHeight;
 
 	matrix.convertHSVscale();
     matrix.inRange(lower_threshold, upper_threshold);
@@ -39,7 +41,9 @@ exports.detectAndRender = function (matrix, frameToRender) {
 	
 	if(maxIndex === -1) { // no object detected in this frame
 		currTargetX = -1;
-		currTargetY = -1;			
+		currTargetY = -1;
+		currWidth = -1;
+		currHeight = -1;			
 	}
 	else {
 		var currRect = contours.boundingRect(maxIndex, 0);
@@ -47,9 +51,13 @@ exports.detectAndRender = function (matrix, frameToRender) {
 		
 		currTargetX = currRect.x + Math.round(currRect.width/2);
 		currTargetY = currRect.y + Math.round(currRect.height/2);
+		currWidth = currRect.width;
+		currHeight = currRect.height;
 	}
-	var coords = new Array();
-	coords[0] = currTargetX;
-	coords[1] = currTargetY;
-	return coords;
+	var targetRect = new Array();
+	targetRect[0] = currTargetX;
+	targetRect[1] = currTargetY;
+	targetRect[2] = currWidth;
+	targetRect[3] = currHeight;
+	return targetRect;
 }

@@ -16,7 +16,7 @@ mdm.on('connection', function (c) {
             img.setAttribute('src', 'data:image/png;base64,' + data);
         });
         
-        emitter.on('coords', function (data) {
+        emitter.on('coordsWeb', function (data) {
         	var text = document.createTextNode(''+data);
         	coords.innerHTML = ''; // clear existing
 			coords.appendChild(text);
