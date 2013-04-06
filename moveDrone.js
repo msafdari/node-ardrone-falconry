@@ -23,33 +23,37 @@ setTimeout(function() {
 		console.log("di~1", di);
 		console.log("fovi~0", fovi);
 		
-		/*
+
 		if (di > 0.8) {
 		    //stop drone
 		} else {
 		    if (fovi>-0.2 && fovi<0.2) {
 			// go straight
-			move(moveFront);
+			//move(moveFront);
+			moveFront();
 		    } else if (fovi > 0.2) {
 			// go clockwise
-			move(moveClock);
+			//move(moveClock);
+			moveClock();
 		    } else if (fovi < -0.2) {
 			// go counter clockwisze
-			move(moveCounterClock);
+			// move(moveCounterClock);
+			moveCounterClock();
 		    }
 		}
-		*/
+
+		setTimeout(hoverDrone, step);
 		
 		// pause
 		//pause(1000);
-
+		/*
 		setTimeout(moveFront, 0);
 		setTimeout(hoverDrone, 0+step);
 		setTimeout(moveBack, 0+step+wait);
 		setTimeout(hoverDrone, 0+step+wait+step);
-		
+		*/
 
-	    }, 0+step+wait+step+wait);
+	    }, step+wait+4000);
     }, takeOffWait);
 
 function moveFront() {
