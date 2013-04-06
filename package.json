@@ -1,0 +1,31 @@
+{
+  "name": "node-ardrone-falconry",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "keys.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "keypress": "*",
+    "ar-drone": "*",
+    "shoe" : "*",
+    "JSONStream" : "*",
+    "emit-stream" : "*",
+    "ecstatic" : "*",
+    "mux-demux" : "*",
+    "dnode" : "*"
+    "opencv" : "*"
+  },
+  "bundleDependencies": ["keypress","canvas"],
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/msafdari/node-ardrone-falconry.git"
+  },
+  "author": "msafdari, anubhavs",
+  "license": "BSD"
+}
