@@ -9,3 +9,9 @@ Download the OpenCV-2.4.5 sources archive from GitHub server via the URL:
 * https://github.com/Itseez/opencv/archive/2.4.5.tar.gz
 
 Then follow the steps here: http://opencv.willowgarage.com/wiki/InstallGuide
+
+Setup Dev Environment
+--------------------
+* Install node.JS, nodejs.org
+* Install ar-drone
+* Install coffee-script, emacs coffee-script mode 
