@@ -4,7 +4,7 @@ var MuxDemux = require('mux-demux');
 var dnode = require('dnode');
 
 var img = document.querySelector('#viewer');
-var crosshairs = document.querySelector('#crosshairs');
+var coords = document.querySelector('#currTargetCoords');
 var control = require('./browser/control');
 
 var mdm = MuxDemux();
@@ -16,11 +16,14 @@ mdm.on('connection', function (c) {
             img.setAttribute('src', 'data:image/png;base64,' + data);
         });
         
+        emitter.on('coords', function (data) {
+        	var text = document.createTextNode(''+data);
+        	coords.innerHTML = ''; // clear existing
+			coords.appendChild(text);
+        });
+        
         emitter.on('red', function () {
-            crosshairs.className = 'active';
-            setTimeout(function () {
-                crosshairs.className = '';
-            }, 500);
+            
         });
     }
     else if (c.meta === 'dnode') {

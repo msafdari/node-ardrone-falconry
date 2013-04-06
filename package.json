@@ -1,5 +1,5 @@
 {
-  "name": "node-ardrone-falconry",
+  "name": "matador-copter",
   "version": "0.0.0",
   "description": "ERROR: No README.md file found!",
   "main": "keys.js",
@@ -14,8 +14,8 @@
     "emit-stream" : "*",
     "ecstatic" : "*",
     "mux-demux" : "*",
-    "dnode" : "*"
-    "opencv" : "*"
+    "dnode" : "*",
+    "color-convert" : "*"
   },
   "bundleDependencies": ["keypress","canvas"],
   "devDependencies": {},
@@ -24,8 +24,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/msafdari/node-ardrone-falconry.git"
+    "url": "git://github.com/substack/matador-copter.git"
   },
-  "author": "msafdari, anubhavs",
+  "author": "",
   "license": "BSD"
 }

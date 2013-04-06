@@ -1,7 +1,14 @@
+/**
+ * AR Drone initialization
+ */
 var drone = require('ar-drone');
 var client = drone.createClient();
-client.disableEmergency();
 
+var cv = require('opencv');
+
+/**
+ * Code for initializing modules dealing with event transmission
+ */
 var shoe = require('shoe');
 var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter;
@@ -37,35 +44,53 @@ var sock = shoe(function (stream) {
         .pipe(mdm.createWriteStream('emit'))
     ;
 });
+
 sock.install(server, '/sock');
 
-var flying = false;
-var redMode = true;
-var speed = 1;
+var detect = require('./detect');
 
-var detect = require('./lib/detect');
+var lastPng;
 
-var png = client.createPngStream({ log : process.stderr });
-png.on('error', function (err) {
+var opencvImageStream = new cv.ImageStream()
+var targetCoords; // coordinates of the target
+opencvImageStream.on('data', function(matrix){
+	if (Date.now() - last.frame < 100){
+		return;
+	}
+	var frameToRender = matrix.copy();
+	targetCoords = detect.detectAndRender(matrix, frameToRender);
+	lastPng = frameToRender.toBuffer();
+});
+
+
+var png = drone.createPngStream({ log : process.stderr }).pipe(opencvImageStream);
+	png.on('error', function (err) {
     console.error('caught error ' + err);
 });
 
 var last = { frame : 0, detect : 0 };
 var detected = false;
+var started = false;
+
+/*
+setTimeout(function() {
+  console.log('Takeoff ...');
+
+  client.takeoff();
+
+}, 1000);
+*/
 
 png.on('data', function (buf) {
+
     if (Date.now() - last.frame >= 100) {
-        emitter.emit('image', buf.toString('base64'));
+        emitter.emit('image', lastPng.toString('base64'));
+        emitter.emit('coords', targetCoords[0] + " " + targetCoords[1]);
         last.frame = Date.now();
     }
-    
-    if (Date.now() - last.detect < 1000) return;
-    last.detect = Date.now();
-    
-    if (!redMode) return;
-    if (detected) return;
-    
-    if (detect(640 / 2, 360 / 2, buf)) {
+       
+    /*
+    if (detect(640, 360, buf)) {
         detected = true;
         emitter.emit('red');
         
@@ -81,7 +106,5 @@ png.on('data', function (buf) {
             detected = false;
         }, 1000);
     }
+    */
 });
-
-process.stdin.setRawMode(true);
-process.stdin.resume();
