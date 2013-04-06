@@ -1,5 +1,5 @@
-var arDrone = require("ar-drone");
-var drone = arDrone.createClient();
+//var arDrone = require("ar-drone");
+//var drone = arDrone.createClient();
 
 var takeOffWait = 10000;
 var step = 2000;
@@ -8,8 +8,10 @@ var landingWait = 2000;
 var speed = 0.1;
 var rotSpeed = 0.2;
 
-console.log("takeoff");
-drone.takeoff();
+exports.takeoff = function(drone) {
+	console.log("takeoff");
+	drone.takeoff();
+}
 
 setTimeout(function() {
 	setInterval(function() {
